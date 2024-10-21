@@ -343,7 +343,7 @@ class Visualizer(nn.Module):
 
             tracked_ids_x             = np.array(tracked_ids)
             tracked_ids_x             = tracked_ids_x[ids_x]        
-            tracked_colors            = np.array(self.colors[list(tracked_ids_x)])/255.0
+            tracked_colors            = np.full([len(tracked_ids), 3], 0.5)
 
             # if "GHOST" in self.cfg.render.type:
             #     tracked_colors[ids_g] = tracked_colors[ids_g]*0.5
