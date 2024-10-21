@@ -32,7 +32,7 @@ class PHALPConfig:
     hungarian_th: float = 100.0
     track_history: int = 7
     max_age_track: int = 50
-    n_init: int = 0
+    n_init: int = 5
     encode_type: str = '4c'
     past_lookback: int = 1
     detector: str = 'vitdet'
