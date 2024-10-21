@@ -173,6 +173,8 @@ class PHALP(nn.Module):
             list_of_frames = list_of_frames if self.cfg.phalp.start_frame==-1 else list_of_frames[self.cfg.phalp.start_frame:self.cfg.phalp.end_frame]
             list_of_shots = self.get_list_of_shots(list_of_frames)
             
+            image_names = [os.path.splitext(os.path.basename(frame))[0] for frame in list_of_frames]
+
             tracked_frames = []
             final_visuals_dic = {}
             
@@ -252,7 +254,8 @@ class PHALP(nn.Module):
                         rendered_, f_size = self.visualizer.render_video(final_visuals_dic[frame_key])      
 
                         # save the rendered frame
-                        self.io_manager.save_video(video_path, rendered_, f_size, t=t__-self.cfg.phalp.n_init)
+                        cv2.imwrite(image_names[t_] + ".png", rendered_) # save frame image only 
+                        # self.io_manager.save_video(video_path, rendered_, f_size, t=t__-self.cfg.phalp.n_init)
 
                         # delete the frame after rendering it
                         del final_visuals_dic[frame_key]['frame']
