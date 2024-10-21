@@ -84,7 +84,7 @@ class IO_Manager():
 
         # read from image folder
         elif(os.path.isdir(source_path)):
-            video_name = source_path.split('/')[-1]
+            video_name = source_path.split('/')[-2]
             list_of_frames = sorted(glob.glob(source_path + "/*.jpg"))
 
         # pkl files are used to track ground truth videos with given bounding box
