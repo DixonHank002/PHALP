@@ -371,7 +371,8 @@ class Visualizer(nn.Module):
                     valid_mask = np.array(valid_mask, dtype=float)
                     valid_mask = numpy_to_torch_image(np.array(valid_mask))
                     
-                    rendered_image_final = valid_mask*rendered_image_final + (1-valid_mask)*image_resized_rgb
+                    #rendered_image_final = valid_mask*rendered_image_final + (1-valid_mask)*image_resized_rgb
+                    rendered_image_final = valid_mask*rendered_image_final + (1-valid_mask)*np.zeros(image_resized_rgb.shape, dtype=np.float32) # set to black
                     rendered_image_final = rendered_image_final[:, :, top_:top_+img_height_, left_:left_+img_width_]
 
                 if "MASK" in self.cfg.render.type or "BBOX" in self.cfg.render.type:
@@ -408,10 +409,10 @@ class Visualizer(nn.Module):
         grid_img = grid_img[[2,1,0], :, :]
         ndarr    = grid_img.mul(255).add_(0.5).clamp_(0, 255).permute(1, 2, 0).to('cpu', torch.uint8).numpy()
         cv_ndarr = cv2.resize(ndarr, frame_size)
-        cv2.putText(cv_ndarr, str(t_), (20,40), cv2.FONT_HERSHEY_TRIPLEX, 1, (0,255,255))
-        if(shot_==1):
-            cv2.putText(cv_ndarr, "SHOT", (20,80), cv2.FONT_HERSHEY_TRIPLEX, 1, (0,255,255))
-            cv2.rectangle(cv_ndarr, (0,0), (frame_size[0], frame_size[1]), (0,0,255), 5)
+        # cv2.putText(cv_ndarr, str(t_), (20,40), cv2.FONT_HERSHEY_TRIPLEX, 1, (0,255,255))
+        # if(shot_==1):
+        #     cv2.putText(cv_ndarr, "SHOT", (20,80), cv2.FONT_HERSHEY_TRIPLEX, 1, (0,255,255))
+        #     cv2.rectangle(cv_ndarr, (0,0), (frame_size[0], frame_size[1]), (0,0,255), 5)
             
         return cv_ndarr, frame_size
 
