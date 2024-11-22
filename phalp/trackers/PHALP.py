@@ -254,7 +254,7 @@ class PHALP(nn.Module):
                         rendered_, f_size = self.visualizer.render_video(final_visuals_dic[frame_key])      
 
                         # save the rendered frame
-                        cv2.imwrite(self.cfg.video.output_dir + image_names[t__-self.cfg.phalp.n_init] + ".png", rendered_) # save frame image only 
+                        cv2.imwrite(self.cfg.video.output_dir + f"{image_names[t__-self.cfg.phalp.n_init]:04d}" + ".png", rendered_) # save frame image only 
                         # self.io_manager.save_video(video_path, rendered_, f_size, t=t__-self.cfg.phalp.n_init)
 
                         # delete the frame after rendering it
