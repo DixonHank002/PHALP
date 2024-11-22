@@ -15,7 +15,7 @@ import torch
 from rich.progress import (BarColumn, Progress, SpinnerColumn,
                            TaskProgressColumn, TextColumn, TimeElapsedColumn,
                            TimeRemainingColumn, TransferSpeedColumn)
-from phalp.utils.colors import phalp_colors, slahmr_colors
+from phalp.utils.colors import phalp_colors, slahmr_colors, black
 
 
 def get_progress_bar(sequence, total=None, description=None, disable=False):
@@ -70,6 +70,8 @@ def get_colors(pallette="phalp"):
             colors = phalp_colors
         elif(pallette=="slahmr"):
             colors = slahmr_colors
+        elif(pallette=="black"):
+            colors = black
         else:
             raise ValueError("Invalid pallette")
 
